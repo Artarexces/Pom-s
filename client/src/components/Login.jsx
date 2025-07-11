@@ -25,9 +25,9 @@ export default function Login() {
     };
 
     return (
-        <div>
+
+        <form onSubmit={handleSubmit}>
             <h2>{isRegister ? 'Registrarse' : 'Iniciar sesión'}</h2>
-            <form onSubmit={handleSubmit}>
                 <input 
                     type="text" 
                     placeholder="Username" 
@@ -45,13 +45,12 @@ export default function Login() {
                 >
                     {isRegister ? 'Registrarse' : 'Iniciar sesión'}
                 </button>
-            </form>
             <p
                 onClick={() => setIsRegister(!isRegister)}
-            >
+                >
                 {isRegister ? 'Ya tienes cuenta?' : 'No tienes cuenta?'}
             </p>
-        </div>
+        </form>
     );
 
 }
