@@ -6,8 +6,8 @@ import { registerUser, loginUser } from '@/lib/api/auth';
 export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const router = useRouter(); 
     const [isRegister, setIsRegister] = useState(false);
+    const router = useRouter(); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,7 +26,7 @@ export default function Login() {
 
     return (
         <div>
-            <h2>{isRegister ? 'Register' : 'Login'}</h2>
+            <h2>{isRegister ? 'Registrarse' : 'Iniciar sesión'}</h2>
             <form onSubmit={handleSubmit}>
                 <input 
                     type="text" 
@@ -43,13 +43,13 @@ export default function Login() {
                 <button 
                     type="submit"
                 >
-                    {isRegister ? 'Register' : 'Login'}
+                    {isRegister ? 'Registrarse' : 'Iniciar sesión'}
                 </button>
             </form>
             <p
                 onClick={() => setIsRegister(!isRegister)}
             >
-                {isRegister ? 'Already have an account?' : 'Don\'t have an account?'}
+                {isRegister ? 'Ya tienes cuenta?' : 'No tienes cuenta?'}
             </p>
         </div>
     );
