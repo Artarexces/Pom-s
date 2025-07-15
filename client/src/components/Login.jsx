@@ -26,29 +26,33 @@ export default function Login() {
 
     return (
 
-        <form onSubmit={handleSubmit}>
-            <h2>{isRegister ? 'Registrarse' : 'Iniciar sesión'}</h2>
+        <form onSubmit={handleSubmit} className='flex flex-col gap-4 bg-blue-50/50 p-6 rounded-lg shadow-md w-80' >
+            <h2 className='text-2xl font-bold text-center cursor-default'>{isRegister ? 'Registrarse' : 'Iniciar sesión'}</h2>
                 <input 
                     type="text" 
+                    className='border border-gray-300 rounded p-2'
                     placeholder="Username" 
                     value={username} 
                     onChange={(e) => setUsername(e.target.value)} 
                 />
                 <input 
                     type="password" 
+                    className='border border-gray-300 rounded p-2'
                     placeholder="Password" 
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
                 />
                 <button 
                     type="submit"
+                    className='cursor-pointer text-center text-white bg-blue-500 hover:bg-blue-600 p-2 rounded'
                 >
                     {isRegister ? 'Registrarse' : 'Iniciar sesión'}
                 </button>
             <p
                 onClick={() => setIsRegister(!isRegister)}
+                className="cursor-pointer text-center text-sm text-blue-500 hover:text-blue-600"
                 >
-                {isRegister ? 'Ya tienes cuenta?' : 'No tienes cuenta?'}
+                {isRegister ? '¿Ya tienes cuenta?' : '¿No tienes cuenta?'}
             </p>
         </form>
     );
