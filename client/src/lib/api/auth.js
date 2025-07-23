@@ -12,7 +12,7 @@ export const authHeaders = () => {
 
 export const registerUser = async (username, password) => {
     try {
-        const response = await axios.post(`${API_BASE}/register`, { username, password });
+        const response = await axios.post(`${API_BASE}/register/`, { username, password });
         return response.data;
     } catch (err) {
         if (err.response?.status === 400) {
@@ -25,7 +25,7 @@ export const registerUser = async (username, password) => {
 
 export const loginUser = async (username, password) => {
     try {
-        const response = await axios.post(`${API_BASE}/login`, { username, password });
+        const response = await axios.post(`${API_BASE}/login/`, { username, password });
         return response.data;
     } catch (err) {
         if (err.response?.status === 401) {
