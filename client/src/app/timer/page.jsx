@@ -60,12 +60,12 @@ const timePage = () => {
 
     const nextGIF = () => {
         gsap.to(gifRef.current, {
-            duration: 1,
+            duration: 0.3,
             opacity: 0,
             onComplete: () => {
                 setGifIndex((prev) => (prev + 1) % gifs.length);
                 gsap.to(gifRef.current, {
-                    duration: 1,
+                    duration: 0.3,
                     opacity: 1,
                 });
             },
@@ -79,16 +79,22 @@ const timePage = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
-            <h1 className="text-4xl font-bold mb-4">{mode}</h1>
-            <div className="text-6xl font-bold mb-4">{formatTime(timeLeft)}</div>
-            <button onClick={toggleTimer} className="bg-blue-500 text-white px-4 py-2 rounded">
-                {isActive ? 'Pausar' : 'Iniciar'}
-            </button>
-            <button onClick={resetTimer} className="bg-red-500 text-white px-4 py-2 rounded">
-                Resetear
-            </button>
-            <img ref={gifRef} src={currentGIF} alt="GIF" className="mt-4" />
+        <div className='min-h-screen flex flex-col items-center justify-center bg-black text-white p-6'>
+            <h1>{mode === 'work' ? 'Hora de trabajar 💻' : 'Descanso ☕'}</h1>
+            <div>
+                <img 
+                  ref={gifRef}
+                  src={currentGIF} 
+                  alt="GIF"
+                  onClick={nextGIF}
+                  />
+                  <button 
+                    onClick={nextGIF}
+                    className="cursor-pointer text-center text-white bg-blue-500 hover:bg-blue-600 p-2 rounded"
+                  >
+                    <kbd> ▶ Cambiar GIF </kbd>
+                  </button>
+            </div>
         </div>
     );
 };
