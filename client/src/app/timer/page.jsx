@@ -70,30 +70,51 @@ const timePage = () => {
 
 
   return (
-    <div className='min-h-screen m-0 p-0 content-center flex flex-col items-center justify-center bg-gradient-to-b from-slate-800 to-slate-900 text-white'>
-      <div className='mb-6 text-7xl font-bold items-center cursor-default'>{formatTime(timeLeft)}</div>
-      <h1 className='text-4xl font-bold mb-8 text-center cursor-default'>{mode === 'work' ? 'Work work work 💻' : 'Descanso ☕'}</h1>
-      <button onClick={prevGIF} className="absolute mt-16 left-104 text-6xl rounded bg-gradient-to-b from-blue-700 to-fuchsia-800 hover:scale-120 transition-all duration-300 cursor-pointer reverse">
-        <TiMediaRewindOutline />
-      </button>
-      <div className="relative w-72 h-72 mb-6 flex items-center justify-center">
-        <img
-          ref={gifRef}
-          src={currentGIF}
-          alt="GIF"
-          className="w-full h-full object-cover rounded-lg shadow-xl"
-        />
+    <div className="min-h-screen m-0 p-0 flex flex-col items-center justify-center bg-gradient-to-b from-slate-800 to-slate-900 text-white">
+      <div className="mb-6 text-5xl sm:text-6xl md:text-7xl font-bold text-center cursor-default">
+        {formatTime(timeLeft)}
       </div>
-      <button onClick={nextGIF} className="absolute mt-16 right-104 text-6xl rounded bg-gradient-to-b from-blue-700 to-fuchsia-800 hover:scale-120 transition-all duration-300 cursor-pointer reverse">
-        <TiMediaFastForwardOutline />
-      </button>
-      <div className='flex mb-2'>
-        <button onClick={toggleTimer} className="cursor-pointer text-center text-white bg-gradient-to-b from-blue-700 to-fuchsia-800 align-center px-24 py-2 rounded-4xl hover:scale-110 transition-all duration-300">
-          {isActive ? 'Pausa' : 'Inicio'} </button>
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center cursor-default">
+        {mode === 'work' ? 'Work work work 💻' : 'Descanso ☕'}
+      </h1>
+      <div className="relative w-full max-w-xs sm:max-w-md md:max-w-lg flex items-center justify-center mb-6">
+        <button
+          onClick={prevGIF}
+          className="text-4xl sm:text-5xl md:text-6xl rounded bg-gradient-to-b from-blue-700 to-fuchsia-800 hover:scale-110 transition-all duration-300 cursor-pointer mr-2"
+          aria-label="Anterior"
+        >
+          <TiMediaRewindOutline />
+        </button>
+        <div className="w-40 h-40 sm:w-60 sm:h-60 md:w-72 md:h-72 flex items-center justify-center">
+          <img
+            ref={gifRef}
+            src={currentGIF}
+            alt="GIF"
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+          />
+        </div>
+        <button
+          onClick={nextGIF}
+          className="text-4xl sm:text-5xl md:text-6xl rounded bg-gradient-to-b from-blue-700 to-fuchsia-800 hover:scale-110 transition-all duration-300 cursor-pointer ml-2"
+          aria-label="Siguiente"
+        >
+          <TiMediaFastForwardOutline />
+        </button>
       </div>
-      <div className='flex mb-2'>
-        <button onClick={resetTimer} className="cursor-pointer p-2 text-center text-white bg-gradient-to-b from-blue-700 to-fuchsia-800 rounded-2xl hover:scale-110 transition-all duration-300">
-          <LuRefreshCcw className='text-4xl' />
+      <div className="flex mb-2 w-full max-w-xs sm:max-w-md md:max-w-lg">
+        <button
+          onClick={toggleTimer}
+          className="flex-1 cursor-pointer text-center text-white bg-gradient-to-b from-blue-700 to-fuchsia-800 px-4 py-2 rounded-2xl hover:scale-105 transition-all duration-300"
+        >
+          {isActive ? 'Pausa' : 'Inicio'}
+        </button>
+      </div>
+      <div className="flex mb-2 w-full max-w-xs sm:max-w-md md:max-w-lg justify-center">
+        <button
+          onClick={resetTimer}
+          className="flex-1 cursor-pointer p-2 text-center text-white bg-gradient-to-b from-blue-700 to-fuchsia-800 rounded-2xl hover:scale-105 transition-all duration-300"
+        >
+          <LuRefreshCcw className="text-2xl sm:text-3xl text-center md:text-4xl" />
         </button>
       </div>
     </div>
