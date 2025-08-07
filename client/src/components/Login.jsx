@@ -9,10 +9,9 @@ export default function Login() {
     const [isRegister, setIsRegister] = useState(false);
     const router = useRouter();
 
-
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
+        const savedUsername = localStorage.getItem('username');
+        if (savedUsername) {
             router.push('/timer');
         }
     }, []);
@@ -26,6 +25,7 @@ export default function Login() {
             }
             const { access } = await loginUser(username, password);
             localStorage.setItem('token', access);
+            localStorage.setItem('username', username);
             router.push('/timer');
         } catch (error) {
             console.error(error);

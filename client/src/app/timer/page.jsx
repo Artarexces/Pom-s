@@ -87,12 +87,15 @@ const timePage = () => {
           <TbArrowBigLeftLines />
         </button>
         <div className="w-40 h-40 sm:w-60 sm:h-60 md:w-72 md:h-72 flex items-center justify-center">
-          <img
-            ref={gifRef}
-            src={currentGIF}
-            alt="GIF"
-            className="w-full h-full object-cover rounded-lg shadow-xl"
-          />
+          <picture>
+            <source media="(prefers-reduced-motion: no-preference)" srcSet={currentGIF} />
+            <img
+              ref={gifRef}
+              src={currentGIF}
+              alt="GIF"
+              className="w-full h-full object-cover rounded-lg shadow-xl"
+            />
+          </picture>
         </div>
         <button
           onClick={nextGIF}
