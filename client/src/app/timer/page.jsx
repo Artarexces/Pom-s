@@ -93,7 +93,7 @@ const timePage = () => {
               ref={gifRef}
               src={currentGIF}
               alt="GIF"
-              className="w-full h-full object-cover rounded-lg shadow-xl"
+              className="w-full h-full object-cover rounded-full shadow-xl"
             />
           </picture>
         </div>

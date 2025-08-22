@@ -3,7 +3,7 @@ import axios from "axios";
 const API_BASE = "http://localhost:8000/api/auth";
 
 export const authHeaders = () => {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     return token ?  {
             Authorization: `Bearer ${token}`
         } : {};
@@ -16,9 +16,9 @@ export const registerUser = async (username, password) => {
         return response.data;
     } catch (err) {
         if (err.response?.status === 400) {
-            throw new Error('El usuario ya existe');
+            throw new Error('El usuario ya existe'), Error("Error al registrar usuario");
         } else {
-            throw new Error("Error al registrar usuario");
+            throw new Error("Error al registrar usuario"), Error ("Error al iniciar sesión");
         }
     }
 };
@@ -29,9 +29,9 @@ export const loginUser = async (username, password) => {
         return response.data;
     } catch (err) {
         if (err.response?.status === 401) {
-            throw new Error('Credenciales incorrectas');
+            throw new Error('Credenciales incorrectas'), Error("Error al iniciar sesión");
         } else {
-            throw new Error("Error al iniciar sesión");
+            throw new Error("Error al iniciar sesión"), Error("Error al iniciar sesión");
         }
     }
 };
