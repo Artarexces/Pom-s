@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { gsap } from 'gsap';
 import { TbArrowBigLeftLines, TbArrowBigRightLines } from "react-icons/tb";
 import { LuRefreshCcw } from "react-icons/lu";
@@ -22,16 +23,40 @@ const breakGIFS = [
 ];
 
 const timePage = () => {
+  const router = useRouter();
+  const [checked, setChecked] = useState(false);
   const [mode, setMode] = useState('work');
   const [timeLeft, setTimeLeft] = useState(TIMER_OPTIONS.work);
   const [isActive, setIsActive] = useState(false);
   const [gifIndex, setGifIndex] = useState(0);
   const gifRef = useRef(null);
 
+  useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    const manual = sessionStorage.getItem('manualLogin');
+
+    if (token && manual === '1') {
+      setChecked(true);
+      return;
+    }
+
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('refresh');
+    sessionStorage.removeItem('manualLogin');
+    try {
+      localStorage.removeItem('token');
+      localStorage.removeItem('refresh');
+    } catch (e) {}
+
+    router.push('/login');
+  }, [router]);
+
   const gifs = mode === 'work' ? workGIFS : breakGIFS;
   const currentGIF = gifs[gifIndex];
 
   useEffect(() => {
+    if (!checked) return;  
+
     let timer;
     if (isActive && timeLeft > 0) {
       timer = setInterval(() => {
@@ -44,7 +69,7 @@ const timePage = () => {
       setGifIndex(0);
     }
     return () => clearInterval(timer);
-  }, [isActive, timeLeft, mode]);
+  }, [isActive, timeLeft, mode, checked]);
 
   const toggleTimer = () => {
     setIsActive(!isActive);
@@ -69,6 +94,7 @@ const timePage = () => {
 
   const formatTime = sec => `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`
 
+  if (!checked) return null; 
 
   return (
     <div className="min-h-screen m-0 p-0 flex flex-col items-center justify-center bg-gradient-to-b from-slate-900 to-slate-700 text-white">

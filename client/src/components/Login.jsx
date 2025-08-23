@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { registerUser, loginUser } from '@/lib/api/auth';
 
@@ -8,11 +8,25 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [isRegister, setIsRegister] = useState(false);
     const router = useRouter();
+    const formRef = useRef(null);
 
     useEffect(() => {
-        const savedUsername = localStorage.getItem('username');
-        if (savedUsername) {
-            router.push('/timer');
+        try {
+            localStorage.removeItem('token');
+            localStorage.removeItem('refresh');
+        } catch (e) {
+            console.error('[LOGIN] error:', e);
+        }
+
+
+        if (navigator.credentials && navigator.credentials.preventSilentAccess) {
+            navigator.credentials.preventSilentAccess().catch(() => {});
+        }
+
+        const saved = sessionStorage.getItem('username') || localStorage.getItem('username');
+        if (saved) setUsername(saved);
+        if (formRef.current) {
+            formRef.current.onsubmit = null;
         }
     }, []);
 
@@ -23,24 +37,33 @@ export default function Login() {
                 await registerUser(username, password);
                 alert('Usuario registrado correctamente');
             }
-            const { access } = await loginUser(username, password);
-            localStorage.setItem('token', access);
-            localStorage.setItem('username', username);
+            const data = await loginUser(username, password);
+
+            if (data?.access) sessionStorage.setItem('token', data.access);
+            if (data?.refresh) sessionStorage.setItem('refresh', data.refresh);
+            sessionStorage.setItem('username', username);
+
+            sessionStorage.setItem('manualLogin', '1');
+
             router.push('/timer');
         } catch (error) {
-            console.error(error);
+            console.error('[LOGIN] error:', error);
         }
     };
 
     return (
         <form
+            ref={formRef}
             onSubmit={handleSubmit}
+            autoComplete="on"
             className="flex flex-col gap-4 p-4 sm:p-6 md:p-8 w-full max-w-xs sm:max-w-sm text-white"
-            >
+        >
             <h2 className="text-xl sm:text-2xl font-bold text-center cursor-default">
                 {isRegister ? 'Registrarse' : 'Iniciar sesión'}
             </h2>
             <input
+                name="username"
+                autoComplete="username"
                 type="text"
                 className="border border-gray-300 rounded p-2 w-full bg-slate-50/60"
                 placeholder="Username"
@@ -48,6 +71,8 @@ export default function Login() {
                 onChange={(e) => setUsername(e.target.value)}
             />
             <input
+                name="password"
+                autoComplete="current-password"
                 type="password"
                 className="border border-gray-300 rounded p-2 w-full bg-slate-50/60"
                 placeholder="Password"
@@ -68,6 +93,4 @@ export default function Login() {
             </p>
         </form>
     );
-
 }
-
