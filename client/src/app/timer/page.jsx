@@ -5,9 +5,9 @@ import { gsap } from 'gsap';
 import { TbArrowBigLeftLines, TbArrowBigRightLines } from "react-icons/tb";
 import { LuRefreshCcw } from "react-icons/lu";
 
-const TIMER_OPTIONS = {
-  work: 30 * 60,
-  break: 10 * 60,
+export const TIMER_OPTIONS = {
+  work: 0.30 * 60,
+  break: 0.30 * 60,
 };
 
 const workGIFS = [
@@ -97,7 +97,7 @@ const timePage = () => {
   if (!checked) return null; 
 
   return (
-    <div className="min-h-screen m-0 p-0 flex flex-col items-center justify-center bg-gradient-to-b from-slate-900 to-slate-700 text-white">
+    <div className={`min-h-screen m-0 p-0 flex flex-col items-center justify-center text-white transition-colors duration-300 ${mode === 'work' ? 'bg-gradient-to-b from-slate-900 to-slate-700' : 'bg-gradient-to-b from-gray-900 via-yellow-900 to-yellow-600'}`}>
       <div className="mb-6 mr-2 text-5xl sm:text-6xl md:text-7xl font-bold text-center cursor-default">
         {formatTime(timeLeft)}
       </div>
