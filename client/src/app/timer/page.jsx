@@ -5,19 +5,19 @@ import { gsap } from 'gsap';
 import { TbArrowBigLeftLines, TbArrowBigRightLines } from "react-icons/tb";
 import { LuRefreshCcw } from "react-icons/lu";
 
-export const TIMER_OPTIONS = {
+const TIMER_OPTIONS = {
   work: 0.30 * 60,
   break: 0.30 * 60,
 };
 
 const workGIFS = [
-  'https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExajYxNzA5dGJ0dWg3MHNocXJwZXNkc2IzeGRoemRpZGQ4cHY3YnV6biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3mJEekHXkjSCnWGTym/giphy.gif',
+  'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExd255cWJrcXozd2FuNDcza3cxc2drN2MyeDBjY2hpaWR4MHRpajc1aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fY0jahqHsqNznkhoaL/giphy.gif',
   'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzg3ZHpwMTR2a24yZG1pNGZtaW1vemZ4YmF2NWtwZzF6bHliZnZkcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PVaSEpyzGhjfJTss9b/giphy.gif',
   'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGlsMTN0cmtzaGM3M3Z0Z3EyNjRhaXRtem8waHpocmkxNWtjaWl3OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/H4VsPRumdfKAcUGddr/giphy.gif',
 ];
 
 const breakGIFS = [
-  'https://media.giphy.com/media/zZ93Wx8zrX2XAQVTiy/giphy.gif?cid=790b76112771346a936c80a166cf7324451877af9d48165f&ep=v1_user_favorites&rid=giphy.gif&ct=g',
+  'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTIwZGtleHFjZjdrNmZzZXRjYW5yc3dqOXkwNDRnNHFxMG96cmZsbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jJ5bSbIau5SnMgEPJv/giphy.gif',
   'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnRpOWFqNmM2OXJ5aGVob3FucnBrbGwycW9vYmhyNnpjc29taWppNCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/SeFRMluv8ESbu/giphy.gif',
   'https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eGQ1eXJxdHRzZzkxNDRpaTNsbjl5YWdzMzZmNjhzbnA2ejQ1NjNidiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/nM2LLy0AeecUOEjEMZ/giphy.gif',
 ];
@@ -97,7 +97,7 @@ const timePage = () => {
   if (!checked) return null; 
 
   return (
-    <div className={`min-h-screen m-0 p-0 flex flex-col items-center justify-center text-white transition-colors duration-300 ${mode === 'work' ? 'bg-gradient-to-b from-slate-900 to-slate-700' : 'bg-gradient-to-b from-gray-900 via-yellow-900 to-yellow-600'}`}>
+    <div className={`min-h-screen m-0 p-0 flex flex-col items-center justify-center text-white transition-colors duration-300 ${mode === 'work' ? 'bg-gradient-to-b from-slate-950 via-slate-900 to-slate-700' : 'bg-gradient-to-b from-gray-800 via-pink-900 to-pink-800'}`}>
       <div className="mb-6 mr-2 text-5xl sm:text-6xl md:text-7xl font-bold text-center cursor-default">
         {formatTime(timeLeft)}
       </div>
