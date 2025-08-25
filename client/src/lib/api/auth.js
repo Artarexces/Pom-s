@@ -7,11 +7,21 @@ export const authHeaders = () => {
 }
 
 export const registerUser = async (username, password) => {
-  const response = await axios.post(`${API_BASE}/register/`, { username, password });
-  return response.data;
+  try {
+    const response = await axios.post(`${API_BASE}/register/`, { username, password });
+    return response.data;
+  } catch (error) {
+    console.error('[REGISTER] error:', error);
+    throw error;
+  }
 }
 
 export const loginUser = async (username, password) => {
-  const response = await axios.post(`${API_BASE}/login/`, { username, password });
-  return response.data;
+  try {
+    const response = await axios.post(`${API_BASE}/login/`, { username, password });
+    return response.data;
+  } catch (error) {
+    console.error('[LOGIN] error:', error);
+    throw error;
+  }
 }

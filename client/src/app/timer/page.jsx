@@ -6,8 +6,8 @@ import { TbArrowBigLeftLines, TbArrowBigRightLines } from "react-icons/tb";
 import { LuRefreshCcw } from "react-icons/lu";
 
 const TIMER_OPTIONS = {
-  work: 0.30 * 60,
-  break: 0.30 * 60,
+  work: 25 * 60,
+  break: 10 * 60,
 };
 
 const workGIFS = [
