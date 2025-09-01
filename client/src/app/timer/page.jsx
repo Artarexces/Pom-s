@@ -6,8 +6,8 @@ import { TbArrowBigLeftLines, TbArrowBigRightLines } from "react-icons/tb";
 import { LuRefreshCcw } from "react-icons/lu";
 
 const TIMER_OPTIONS = {
-  work: 25 * 60,
-  break: 10 * 60,
+  work: 1 * 60,
+  break: 1 * 60,
 };
 
 const workGIFS = [
@@ -25,7 +25,7 @@ const breakGIFS = [
 const timePage = () => {
   const router = useRouter();
   const [checked, setChecked] = useState(false);
-  const [mode, setMode] = useState('work');
+  const [mode, setMode] = useState('break');
   const [timeLeft, setTimeLeft] = useState(TIMER_OPTIONS.work);
   const [isActive, setIsActive] = useState(false);
   const [gifIndex, setGifIndex] = useState(0);
@@ -107,8 +107,8 @@ const timePage = () => {
       <div className="relative w-full max-w-xs sm:max-w-md md:max-w-lg flex items-center justify-center mb-6">
         <button
           onClick={prevGIF}
-          className="text-4xl sm:text-5xl md:text-6xl rounded bg-gradient-to-l from-slate-800 to-slate-700 hover:scale-115 transition-all duration-300 cursor-pointer mr-2"
-          aria-label="Anterior"
+          className={`text-4xl sm:text-5xl md:text-6xl rounded ${mode === 'work' ? 'bg-gradient-to-l from-slate-800 to-slate-700' : 'bg-gradient-to-l from-gray-800 via-pink-900 to-pink-800'} hover:scale-115 transition-all duration-300 cursor-pointer mr-3`}
+          label="Anterior"
         >
           <TbArrowBigLeftLines />
         </button>
@@ -125,8 +125,8 @@ const timePage = () => {
         </div>
         <button
           onClick={nextGIF}
-          className="text-4xl sm:text-5xl md:text-6xl rounded bg-gradient-to-r from-slate-700 to-slate-800 hover:scale-115 transition-all duration-300 cursor-pointer ml-2"
-          aria-label="Siguiente"
+          className={`text-4xl sm:text-5xl md:text-6xl rounded ${mode === 'work' ? 'bg-gradient-to-r from-slate-700 to-slate-800' : 'bg-gradient-to-r from-gray-800 via-pink-900 to-pink-800'} hover:scale-115 transition-all duration-300 cursor-pointer ml-3`}
+          label="Siguiente"
         >
           <TbArrowBigRightLines />
         </button>
@@ -134,7 +134,7 @@ const timePage = () => {
       <div className="flex mb-2 w-60 max-w-xs sm:max-w-md md:max-w-lg justify-center">
         <button
           onClick={toggleTimer}
-          className="flex-1 cursor-pointer items-center justify-center text-center text-white bg-gradient-to-b from-slate-700 to-slate-900 px-4 py-2 rounded-2xl hover:scale-105 transition-all duration-300"
+          className={`flex-1 cursor-pointer items-center justify-center text-center text-white rounded-2xl hover:scale-105 transition-all duration-300 ${mode === 'work' ? 'bg-gradient-to-b from-slate-700 to-slate-900' : 'bg-gradient-to-t from-gray-800 via-pink-900 to-pink-800'}`}
         >
           {isActive ? 'Pausa' : 'Inicio'}
         </button>
@@ -142,7 +142,7 @@ const timePage = () => {
       <div className="flex mb-2 w-50 max-w-xs sm:max-w-md md:max-w-lg justify-center">
         <button
           onClick={resetTimer}
-          className="cursor-pointer p-2 items-center justify-center text-center text-white bg-gradient-to-b from-slate-700 to-slate-900 rounded-2xl hover:scale-105 transition-all duration-300"
+          className= {`cursor-pointer p-2 items-center justify-center text-center text-white rounded-2xl hover:scale-105 transition-all duration-300 ${mode === 'work' ? 'bg-gradient-to-b from-slate-700 to-slate-900' : 'bg-gradient-to-t from-gray-800 via-pink-900 to-pink-800'}`}
         >
           <LuRefreshCcw className="text-xl sm:text-2xl md:text-3xl" />
         </button>
