@@ -11,6 +11,7 @@ export default function Home() {
             router.push('/timer');
         }
     }, []);
+    
     return (
         <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-slate-800 to-slate-900">
             <Login />
