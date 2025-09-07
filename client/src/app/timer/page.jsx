@@ -25,7 +25,7 @@ const breakGIFS = [
 const timePage = () => {
   const router = useRouter();
   const [checked, setChecked] = useState(false);
-  const [mode, setMode] = useState('break');
+  const [mode, setMode] = useState('work');
   const [timeLeft, setTimeLeft] = useState(TIMER_OPTIONS.work);
   const [isActive, setIsActive] = useState(false);
   const [gifIndex, setGifIndex] = useState(0);
@@ -97,7 +97,7 @@ const timePage = () => {
   if (!checked) return null; 
 
   return (
-    <div className={`min-h-screen m-0 p-0 flex flex-col items-center justify-center text-white transition-colors duration-300 ${mode === 'work' ? 'bg-gradient-to-b from-slate-950 via-slate-900 to-slate-700' : 'bg-gradient-to-b from-gray-800 via-pink-900 to-pink-800'}`}>
+    <div className={`min-h-screen m-0 p-0 flex flex-col items-center justify-center text-gray-300 transition-colors duration-300 ${mode === 'work' ? 'bg-gradient-to-b from-slate-900 via-slate-800 to-slate-600' : 'bg-gradient-to-b from-orange-600 via-orange-700 to-orange-900'}`}>
       <div className="mb-6 mr-2 text-5xl sm:text-6xl md:text-7xl font-bold text-center cursor-default">
         {formatTime(timeLeft)}
       </div>
@@ -107,7 +107,7 @@ const timePage = () => {
       <div className="relative w-full max-w-xs sm:max-w-md md:max-w-lg flex items-center justify-center mb-6">
         <button
           onClick={prevGIF}
-          className={`text-4xl sm:text-5xl md:text-6xl rounded-xl blur-3xl hover:blur-none border-none outline-none ${mode === 'work' ? 'bg-gradient-to-l from-slate-800 to-slate-700' : 'bg-gradient-to-l from-gray-800 via-pink-900 to-pink-800'} hover:scale-115 transition-all duration-300 cursor-pointer mr-3`}
+          className={`text-4xl sm:text-5xl md:text-6xl blur-3xl hover:blur-none border-none outline-none hover:scale-115 transition-all duration-300 cursor-pointer mr-3`}
           label="Anterior"
         >
           <TbArrowBigLeftLines />
@@ -118,7 +118,7 @@ const timePage = () => {
             <img
               ref={gifRef}
               src={currentGIF}
-              alt="GIF"
+              alt="GIF" 
               onClick={toggleTimer}
               className="w-full h-full object-cover rounded-full shadow-xl cursor-pointer"
             />
@@ -126,7 +126,7 @@ const timePage = () => {
         </div>
         <button
           onClick={nextGIF}
-          className={`text-4xl sm:text-5xl md:text-6xl rounded-xl blur-3xl hover:blur-none border-none outline-none ${mode === 'work' ? 'bg-gradient-to-r from-slate-700 to-slate-800' : 'bg-gradient-to-r from-gray-800 via-pink-900 to-pink-800'} hover:scale-115 transition-all duration-300 cursor-pointer ml-3`}
+          className={`text-4xl sm:text-5xl md:text-6xl blur-3xl hover:blur-none border-none outline-none hover:scale-115 transition-all duration-300 cursor-pointer ml-3`}
           label="Siguiente"
         >
           <TbArrowBigRightLines />
@@ -135,7 +135,7 @@ const timePage = () => {
       <div className="flex mb-2 w-50 max-w-xs sm:max-w-md md:max-w-lg justify-center">
         <button
           onClick={toggleTimer}
-          className={`flex-1 cursor-pointer items-center justify-center text-center text-white rounded-2xl hover:scale-105 transition-all duration-300 ${mode === 'work' ? 'bg-gradient-to-b from-slate-700 to-slate-900' : 'bg-gradient-to-t from-gray-800 via-pink-900 to-pink-800'}`}
+          className={'flex-1 cursor-pointer text-xl sm:text-2xl md:text-3xl font-bold blur-2xl hover:blur-none items-center justify-center text-center text-white hover:scale-105 transition-all duration-300'}
         >
           {isActive ? 'Pausa' : 'Inicio'}
         </button>
@@ -143,7 +143,7 @@ const timePage = () => {
       <div className="flex mb-2 w-50 max-w-xs sm:max-w-md md:max-w-lg justify-center">
         <button
           onClick={resetTimer}
-          className= {`cursor-pointer p-2 items-center justify-center text-center text-white rounded-2xl hover:scale-105 transition-all duration-300 ${mode === 'work' ? 'bg-gradient-to-b from-slate-700 to-slate-900' : 'bg-gradient-to-t from-gray-800 via-pink-900 to-pink-800'}`}
+          className= {'cursor-pointer p-2 items-center justify-center text-center blur-2xl hover:blur-none text-white hover:scale-105 transition-all duration-300'}
         >
           <LuRefreshCcw className="text-xl sm:text-2xl md:text-3xl" />
         </button>
