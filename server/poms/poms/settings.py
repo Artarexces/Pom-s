@@ -10,6 +10,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'server.poms.settings')
+
 
 
 INSTALLED_APPS = [
