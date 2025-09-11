@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure-pj!jvjw#f$ovwu+dw6d(tv4ht4*hqy-32!*@#4y*^-=%a8k%6q
 
 DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://pom-s.onrender.com/api', 'localhost', '127.0.0.1']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -63,12 +63,34 @@ TEMPLATES = [
 WSGI_APPLICATION = 'poms.wsgi.application'
 
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Database configuration
 DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL'),
-        conn_max_age=600
+        conn_max_age=600,
+        ssl_require=not DEBUG
     )
 }
+
+# Para asegurar que funciona con PostgreSQL
+if DEBUG:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+else:
+    DATABASES['default'] = dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "https://tu-frontend.vercel.app",
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -80,6 +102,8 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
 "https://pom-s.vercel.app",
 ]
+
+CORS_ALLOW_CREDENTIALS = True
 
 AUTH_PASSWORD_VALIDATORS = [
     {

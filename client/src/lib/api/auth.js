@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_URL = "https://pom-s-backend.onrender.com/api";
+const API_URL = "https://pom-s.onrender.com/api";
 
 export const authHeaders = () => {
   const token = sessionStorage.getItem('token');
