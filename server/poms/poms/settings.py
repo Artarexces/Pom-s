@@ -89,7 +89,7 @@ else:
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
-    "https://tu-frontend.vercel.app",
+    "https://pom-s.vercel.app",
 ]
 
 REST_FRAMEWORK = {
