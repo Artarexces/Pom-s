@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "https://pom-s-backend.onrender.com/api/auth";
+const API_URL = ""
 
 export const registerUser = async (username, password) => {
   try {
