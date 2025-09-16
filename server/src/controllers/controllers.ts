@@ -2,26 +2,28 @@ import { Request, Response } from "express";
 import User from "../models/User";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { validateUser } from "../utils/validation";
 
 const JWT_SECRET = process.env.JWT_SECRET || "secret";
 
 export const register = async (req: Request, res: Response) => {
     try {
-        const { username, password } = req.body;
-        if (!username || !password) {
-            return res.status(400).json({ message: "Nombre y contraseña son obligatorios" });
+        const validationResult = validateUser(req.body);
+        if (!validationResult.success) {
+            return res.status(400).json({ 
+                message: "Datos inválidos", 
+                errors: validationResult.error.issues 
+            });
         }
+        const { username, password } = validationResult.data;
         const existUser = await User.findOne({ username });
         if (existUser) {
             return res.status(400).json({ message: "El usuario ya existe" });
         }
-
         const hashed = await bcrypt.hash(password, 10);
         const user = new User({ username, password: hashed });
         await user.save();
-        
         return res.status(201).json({ message: "Usuario registrado exitosamente", user });
-               
     } catch (err) {
         console.error(`🛑 Error al registrar el usuario | ${(err as Error).message}`);
         return res.status(500).json({ message: "Error al registrar el usuario", err });
@@ -30,10 +32,14 @@ export const register = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
     try {
-        const { username, password } = req.body;
-        if (!username || !password) {
-            return res.status(400).json({ message: "Nombre y contraseña son obligatorios" });
+        const validationResult = validateUser(req.body);
+        if (!validationResult.success) {
+            return res.status(400).json({ 
+                message: "Datos inválidos", 
+                errors: validationResult.error.issues 
+            });
         }
+        const { username, password } = validationResult.data;
         const user = await User.findOne({ username });
         if (!user) {
             return res.status(400).json({ message: "El usuario no existe" });
