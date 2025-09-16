@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { connectDB } from "./utils/db";
+import routes from "./routes/routes";
 
 process.loadEnvFile();
 
@@ -10,6 +11,9 @@ const PORT = process.env.PORT || 5500;
 
 app.use(cors());
 app.use(express.json());
+
+app.use("/", routes);
+
 
 
 app.listen(PORT, () => {
