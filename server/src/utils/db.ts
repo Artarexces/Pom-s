@@ -1,6 +1,8 @@
 import { connect } from "mongoose";
 
-process.loadEnvFile();
+if (process.env.NODE_ENV !== "production") {
+    process.loadEnvFile();
+}
 
 const URI_DB = process.env.URI_DB!;
 

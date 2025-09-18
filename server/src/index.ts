@@ -3,7 +3,9 @@ import cors from "cors";
 import { connectDB } from "./utils/db";
 import routes from "./routes/routes";
 
-process.loadEnvFile();
+if (process.env.NODE_ENV !== "production") {
+    process.loadEnvFile();
+}
 
 const app = express();
 const PORT = process.env.PORT || 5500;
