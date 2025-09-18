@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const registerUser = async (username, password) => {
   try {
-    const response = await axios.post(`${NEXT_PUBLIC_API_URL}/register/`, { 
+    const response = await axios.post(`${API_URL}/register`, { 
       username, 
       password 
     });
@@ -17,7 +17,7 @@ export const registerUser = async (username, password) => {
 
 export const loginUser = async (username, password) => {
   try {
-    const response = await axios.post(`${NEXT_PUBLIC_API_URL}/login/`, { 
+    const response = await axios.post(`${API_URL}/login`, { 
       username, 
       password 
     });
