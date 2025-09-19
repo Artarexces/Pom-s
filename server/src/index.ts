@@ -19,6 +19,9 @@ app.use(express.json());
 
 app.use("/", routes);
 
+app.get("/ping", (req, res) => {
+  res.send("Servidor corriendo 🚀");
+});
 
 
 app.listen(PORT, () => {
