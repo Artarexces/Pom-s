@@ -1,8 +1,7 @@
 import { connect } from "mongoose";
+import dotenv from 'dotenv'
 
-if (process.env.NODE_ENV !== "production") {
-    process.loadEnvFile();
-}
+dotenv.config()
 
 const URI_DB = process.env.URI_DB!;
 
