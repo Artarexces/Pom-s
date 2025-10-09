@@ -24,11 +24,9 @@ export const loginUser = async (username, password) => {
       password 
     });
     
-    // Guardar token en sessionStorage
     if (response.data.access) {
       sessionStorage.setItem('token', response.data.access);
     }
-    
     return response.data;
   } catch (error) {
     console.error('[LOGIN] error:', error.response?.data || error.message);
